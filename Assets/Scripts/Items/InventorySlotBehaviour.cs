@@ -6,14 +6,11 @@ namespace DapperDino.GGJ2020.Items
     {
         public int SlotIndex { get; private set; }
 
-        private void Start()
-        {
-            SlotIndex = transform.GetSiblingIndex();
-        }
+        private void Awake() => SlotIndex = transform.GetSiblingIndex();
 
         private void OnEnable()
         {
-            UpdateSlot(inventoryBehaviour.Inventory.Items[SlotIndex]);
+            UpdateSlot(SlotIndex, inventoryBehaviour.Inventory.Items[SlotIndex]);
 
             inventoryBehaviour.Inventory.OnInventorySlotUpdate += UpdateSlot;
         }

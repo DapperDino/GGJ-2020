@@ -18,9 +18,27 @@ namespace DapperDino.GGJ2020.Items
 
         private readonly Dictionary<PartType, Item> equipment = new Dictionary<PartType, Item>();
 
+        public bool AddItem(ItemTemplate itemTemplate) => AddItem(new Item(itemTemplate));
+
+        public bool AddItem(Item item)
+        {
+            for (int i = 0; i < Items.Length; i++)
+            {
+                if (Items[i] != null) { continue; }
+
+                Items[i] = item;
+
+                OnInventorySlotUpdate(i, item);
+
+                return true;
+            }
+
+            return false;
+        }
+
         public Item GetItemByPartType(PartType partType)
         {
-            if(equipment.TryGetValue(partType, out Item item))
+            if (equipment.TryGetValue(partType, out Item item))
             {
                 return item;
             }

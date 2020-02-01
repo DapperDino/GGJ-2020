@@ -2,8 +2,89 @@
     "name": "Controls",
     "maps": [
         {
-            "name": "Player",
+            "name": "Developer",
+            "id": "15e73c19-ef9f-4a87-929e-f6e7b02d03f0",
+            "actions": [
+                {
+                    "name": "Console Commands",
+                    "type": "Button",
+                    "id": "6f498959-f5ad-4497-a55e-d71424527fb2",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press"
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "4c0b0e16-6ff9-4ad7-ae58-e8bac03f333e",
+                    "path": "<Keyboard>/backquote",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "Console Commands",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Pause Menu",
             "id": "e072fe59-e724-43d0-9b2f-97ff8263d610",
+            "actions": [
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "8b69d0a4-69fb-4136-b69a-604c2c472c73",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press"
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "af21341a-b66c-41c0-be8f-02886ef5b981",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "UI",
+            "id": "8e2244b0-5773-45d6-8ebe-dedda319cc94",
+            "actions": [
+                {
+                    "name": "Inventory",
+                    "type": "Button",
+                    "id": "47116e6d-f198-42f5-94ba-72e9ca754633",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press"
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "0fc29e7a-854f-46d1-b42a-7bb2cf43f919",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "Inventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Player",
+            "id": "0caf1a10-5d64-4fe1-a0b7-918e55172fa9",
             "actions": [
                 {
                     "name": "Movement",

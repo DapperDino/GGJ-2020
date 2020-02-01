@@ -12,7 +12,7 @@ namespace DapperDino.GGJ2020.Items
 
         private void OnEnable()
         {
-            UpdateSlot(inventoryBehaviour.Inventory.GetItemByPartType(PartType));
+            UpdateSlot(PartType, inventoryBehaviour.Inventory.GetItemByPartType(PartType));
 
             inventoryBehaviour.Inventory.OnEquipmentSlotUpdate += UpdateSlot;
         }

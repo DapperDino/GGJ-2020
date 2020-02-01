@@ -12,6 +12,7 @@ namespace DapperDino.GGJ2020.Items
             this.template = template;
         }
 
+        public int Id => template.Id;
         public string Name => template.name;
         public PartType PartType => template.PartType;
         public Sprite Icon => template.Icon;

@@ -22,6 +22,10 @@ public class WorldGenateration : MonoBehaviour
 
     void Awake()
     {
+        Wall = Resources.Load<GameObject>("Rooms/Wall/Wall");
+        Door = Resources.Load<GameObject>("Rooms/Wall/Door");
+        LockedDoor = Resources.Load<GameObject>("Rooms/Wall/LockedDoor");
+
         GenerateLayout();
         ApplyRooms();
     }
@@ -30,9 +34,11 @@ public class WorldGenateration : MonoBehaviour
     {
         Add(startingRoom);
         var lastNode = nodes[0];
+        bool hasKey = false;
 
         for (int i = 0; i < MaxRooms; i++)
         {
+            
             Node newNode = new Node();
 
             // Check if the lastNode
@@ -64,7 +70,9 @@ public class WorldGenateration : MonoBehaviour
                                 if (IsValidSpace)
                                 {
                                     newNode.RoomFlags |= RoomFlags.SouthDoor;
-                                    lastNode.RoomFlags |= RoomFlags.NorthDoor;
+                                    lastNode.RoomFlags |= (hasKey) ? RoomFlags.LockedNorthDoor : RoomFlags.NorthDoor;
+
+                                    hasKey = false;
                                 }
                                 break;
                             case 1: // East
@@ -73,7 +81,9 @@ public class WorldGenateration : MonoBehaviour
                                 if (IsValidSpace)
                                 {
                                     newNode.RoomFlags |= RoomFlags.WestDoor;
-                                    lastNode.RoomFlags |= RoomFlags.EastDoor;
+                                    lastNode.RoomFlags |= (hasKey) ? RoomFlags.LockedEastDoor : RoomFlags.EastDoor;
+
+                                    hasKey = false;
                                 }
                                 break;
                             case 2: // South
@@ -82,7 +92,9 @@ public class WorldGenateration : MonoBehaviour
                                 if (IsValidSpace)
                                 {
                                     newNode.RoomFlags |= RoomFlags.NorthDoor;
-                                    lastNode.RoomFlags |= RoomFlags.SouthDoor;
+                                    lastNode.RoomFlags |= (hasKey) ? RoomFlags.LockedSouthDoor : RoomFlags.SouthDoor;
+
+                                    hasKey = false;
                                 }
                                 break;
                             case 3: // West
@@ -91,7 +103,9 @@ public class WorldGenateration : MonoBehaviour
                                 if (IsValidSpace)
                                 {
                                     newNode.RoomFlags |= RoomFlags.EastDoor;
-                                    lastNode.RoomFlags |= RoomFlags.WestDoor;
+                                    lastNode.RoomFlags |= (hasKey) ? RoomFlags.LockedWestDoor : RoomFlags.WestDoor;
+
+                                    hasKey = false;
                                 }
                                 break;
                         }
@@ -114,12 +128,18 @@ public class WorldGenateration : MonoBehaviour
                     if (chainLengthCounter > 1)
                     {
                         currentChain++;
-                        // ADD key
-                        if ((lastNode.RoomFlags & RoomFlags.ContainsKey) == 0)
+                        // TODO: make this random so multiple branching paths get generated with open doors.
+                        // TODO: remove the current if statement?
+                        //if ((lastNode.RoomFlags & RoomFlags.ContainsKey) == 0)
                         {
                             lastNode.RoomFlags |= RoomFlags.ContainsKey;
                             lastNode.Name += "_ContainsKey";
+                            hasKey = true;
                         }
+                    }
+                    else
+                    {
+                        Debug.Log("Current chain length was zero, finding now point to start");
                     }
 
                     var totalBackwardsSteps = UnityEngine.Random.Range(1, totalChainLength - 2);
@@ -156,23 +176,46 @@ public class WorldGenateration : MonoBehaviour
             }
             newNode.Name = $"Node:{currentChain}_{chainLengthCounter}";
             newNode.Parent = lastNode;
+            lastNode.neighbors.Add(newNode);
             Add(newNode);
             lastNode = newNode;
         }
+        Debug.Log("<color=green>Finished generating the layout!</color>");
     }
+
+    private RoomProperties[] Rooms;
+    private static GameObject Wall;
+    private static GameObject Door;
+    private static GameObject LockedDoor;
     private void ApplyRooms()
     {
-        foreach(var _node in nodes)
+        Rooms = Resources.LoadAll<RoomProperties>("Rooms");
+        Debug.Log($"Rooms found in the resources directory: {Rooms.Length}.");
+
+
+        foreach (var _node in nodes)
         {
             // Check for the kind of room that is required.
             // As in: where we need doors.
-            var roomObject = Resources.Load<GameObject>("Rooms/DefaultRoom");
+            var roomId = UnityEngine.Random.Range(0, Rooms.Length - 1);
+            var roomObject = Rooms[roomId].gameObject; /*Resources.Load<GameObject>("Rooms/DefaultRoom");*/
             _node.GameObject = Instantiate(roomObject, new Vector3(_node.X * RoomSize, 0, _node.Y * RoomSize), roomObject.transform.rotation, this.transform);
             _node.GameObject.name = _node.Name;
             // TODO: remove this
-            _node.GameObject.transform.localScale = (new Vector3(20, 20, 1));
+            //_node.GameObject.transform.localScale = (new Vector3(20, 20, 1));
             var room = _node.GameObject.AddComponent<Room>();
             room.Node = _node;
+
+
+            //Placewalls
+            Quaternion wallRotation = Quaternion.identity;
+            for(int i = 0; i < 4; i++)
+            {
+                var wall = GetWall(_node.RoomFlags, i);
+                Instantiate(wall, _node.GameObject.transform.position + wall.transform.position, wallRotation, _node.GameObject.transform);
+                // Rotate the next wall by 90 degrees
+                wallRotation *= Quaternion.Euler(0,90,0);
+            }
         }
     }
 
@@ -187,6 +230,45 @@ public class WorldGenateration : MonoBehaviour
         nodes.Add(node);
     }
 
+    /// <summary>
+    /// Returns the correct wall.
+    /// </summary>
+    /// <param name="flags">The flags</param>
+    /// <param name="direction">0 north, 1 east, 2 south, 3 west</param>
+    /// <returns></returns>
+    static GameObject GetWall(RoomFlags flags, int direction)
+    {
+        GameObject wall = Wall;
+        switch (direction)
+        {
+            case 0:
+                if ((flags & RoomFlags.NorthDoor) != 0)
+                    wall = Door;
+                if ((flags & RoomFlags.LockedNorthDoor) != 0)
+                    wall = LockedDoor;
+                break;
+            case 1:
+                if ((flags & RoomFlags.EastDoor) != 0)
+                    wall = Door;
+                if ((flags & RoomFlags.LockedEastDoor) != 0)
+                    wall = LockedDoor;
+                break;
+            case 2:
+                if ((flags & RoomFlags.SouthDoor) != 0)
+                    wall = Door;
+                if ((flags & RoomFlags.LockedSouthDoor) != 0)
+                    wall = LockedDoor;
+                break;
+            case 3:
+                if ((flags & RoomFlags.WestDoor) != 0)
+                    wall = Door;
+                if ((flags & RoomFlags.LockedWestDoor) != 0)
+                    wall = LockedDoor;
+                break;
+
+        }
+        return wall;
+    }
     static readonly int[] directions = { 0, 1, 2, 3 };
     static int[] GetRandomDirection()
     {

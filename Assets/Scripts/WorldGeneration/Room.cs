@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -16,12 +17,23 @@ public class Room : MonoBehaviour
         set
         {
             node = value;
+            // For debugability sake.
             Name = node.Name;
             RoomFlags = node.RoomFlags;
             TotalFlags = (int)RoomFlags;
+            Neighbors = node.neighbors.Select(x => x.Name).ToList();
         } 
     }
-    [SerializeField] public string Name;
-    [SerializeField] public RoomFlags RoomFlags;
-    [SerializeField] public int TotalFlags;
+    // Here for readability
+    [SerializeField] internal string Name;
+    [SerializeField] internal RoomFlags RoomFlags;
+    [SerializeField] internal int TotalFlags;
+    [SerializeField] public List<string> Neighbors;
+
+    private bool isCleared;
+    public bool IsCleared
+    {
+        get { return isCleared; }
+        set { isCleared = value; }
+    }
 }

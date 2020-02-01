@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -15,7 +14,7 @@ namespace DapperDino.GGJ2020.Items
         {
             var usedIds = new List<int>();
 
-            foreach(var item in items)
+            foreach (var item in items)
             {
                 if (usedIds.Contains(item.Id))
                 {
@@ -31,5 +30,7 @@ namespace DapperDino.GGJ2020.Items
         {
             return items.FirstOrDefault(x => x.Name.Equals(name, System.StringComparison.OrdinalIgnoreCase));
         }
+
+        public ItemTemplate GetItemById(int id) => items.FirstOrDefault(x => x.Id == id);
     }
 }

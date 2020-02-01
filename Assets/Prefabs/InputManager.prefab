@@ -52,3 +52,5 @@ MonoBehaviour:
   inputActions:
   - {fileID: 11400000, guid: a835f27b8bc31e14eb9d97316e904cd5, type: 2}
   - {fileID: 11400000, guid: 94547934a3d250843a80b42cf80b982f, type: 2}
+  - {fileID: 11400000, guid: 59fd37df7435c23418d127d86d5c2d67, type: 2}
+  - {fileID: 11400000, guid: f18ef9bf14cb66041b65da8244f8d1f9, type: 2}

@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c402acc951fb2354392e0d89f2582647, type: 3}
-  m_Name: PartType_Arm_Right
+  m_Script: {fileID: 11500000, guid: 20e488f8ab3c7fd4a9745e0c83802f08, type: 3}
+  m_Name: Action_FireLeft
   m_EditorClassIdentifier: 
-  name: Right Arm
+  inputAction: {fileID: -161346220228847292, guid: defe64ed6f59c9f4592199a9893c4318,
+    type: 3}

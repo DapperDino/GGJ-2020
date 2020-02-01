@@ -99,8 +99,24 @@
                     "type": "Value",
                     "id": "552b61e9-1acb-4e9c-a6f6-ddef5a12526f",
                     "expectedControlType": "Vector2",
-                    "processors": "",
+                    "processors": "ScaleVector2(x=0.25,y=0.25)",
                     "interactions": ""
+                },
+                {
+                    "name": "Fire Left",
+                    "type": "Button",
+                    "id": "902945a6-e3e3-4c0d-bf13-16b8248e715f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press"
+                },
+                {
+                    "name": "Fire Right",
+                    "type": "Button",
+                    "id": "f08f6455-79dc-4c30-8b2e-82e230644278",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press"
                 }
             ],
             "bindings": [
@@ -332,6 +348,28 @@
                     "processors": "",
                     "groups": "Keyboard & Mouse",
                     "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2efba8f5-14f0-4947-8e59-6b4d17ad765f",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "Fire Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "acfc713f-1cb6-4c33-aba4-37b7112ae21f",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "Fire Right",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

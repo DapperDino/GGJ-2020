@@ -835,6 +835,7 @@ MonoBehaviour:
   commandPrefix: /
   commands:
   - {fileID: 11400000, guid: 9dfff703c09c162449b43cb19b1f7919, type: 2}
+  - {fileID: 11400000, guid: 9b50678d49cb0184780f0f6755961276, type: 2}
   uiCanvas: {fileID: 1005529010}
   inputField: {fileID: 1669160770}
 --- !u!114 &628201557

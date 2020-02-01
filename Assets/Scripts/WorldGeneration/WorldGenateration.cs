@@ -9,17 +9,22 @@ namespace DapperDino.GGJ2020.World
     public class WorldGenateration : MonoBehaviour
     {
         private List<Node> nodes = new List<Node>();
-        private static Node startingRoom = new Node() { Name = "StartingRoom", RoomFlags = RoomFlags.NorthDoor, X = 0, Y = 0 };
+        private static readonly Node startingRoom = new Node() { Name = "StartingRoom", RoomFlags = RoomFlags.NorthDoor, X = 0, Y = 0 };
 
-        [Range(1, 100)]
-        public uint MaxRooms = 3;
-        [Range(3, 100)]
-        public int MaxChain = 5;
+        [Range(1, 100)] public uint MaxRooms = 3;
+        [Range(3, 100)] public int MaxChain = 5;
         private int randomChainLength = 4;
         private int chainLengthCounter = 0;
         private int currentChain = 0;
         private int totalChainLength = 0;
-        private const uint RoomSize = 60;
+
+        [Range(1,100)][SerializeField] private uint RoomSizeMultiplier = 1;
+        private const uint RoomSize = 20;
+
+        private RoomProperties[] Rooms;
+        private static GameObject Wall;
+        private static GameObject Door;
+        private static GameObject LockedDoor;
 
 
         void Awake()
@@ -185,10 +190,6 @@ namespace DapperDino.GGJ2020.World
             Debug.Log("<color=green>Finished generating the layout!</color>");
         }
 
-        private RoomProperties[] Rooms;
-        private static GameObject Wall;
-        private static GameObject Door;
-        private static GameObject LockedDoor;
         private void ApplyRooms()
         {
             Rooms = Resources.LoadAll<RoomProperties>("Rooms");
@@ -200,11 +201,12 @@ namespace DapperDino.GGJ2020.World
                 // Check for the kind of room that is required.
                 // As in: where we need doors.
                 var roomId = UnityEngine.Random.Range(0, Rooms.Length - 1);
-                var roomObject = Rooms[roomId].gameObject; /*Resources.Load<GameObject>("Rooms/DefaultRoom");*/
-                _node.GameObject = Instantiate(roomObject, new Vector3(_node.X * RoomSize, 0, _node.Y * RoomSize), roomObject.transform.rotation, this.transform);
+                var roomObject = Rooms[roomId].gameObject;
+                _node.GameObject = Instantiate(roomObject, 
+                    new Vector3(_node.X * RoomSize * RoomSizeMultiplier, 0, _node.Y * RoomSize * RoomSizeMultiplier), 
+                    roomObject.transform.rotation, this.transform);
                 _node.GameObject.name = _node.Name;
-                // TODO: remove this
-                //_node.GameObject.transform.localScale = (new Vector3(20, 20, 1));
+                _node.GameObject.transform.localScale *= RoomSizeMultiplier;
                 var room = _node.GameObject.AddComponent<Room>();
                 room.Node = _node;
 

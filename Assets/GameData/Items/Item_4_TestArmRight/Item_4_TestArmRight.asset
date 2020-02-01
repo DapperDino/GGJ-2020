@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cfc951a24c52da49a055cf7c7ed505f, type: 3}
+  m_Name: Item_4_TestArmRight
+  m_EditorClassIdentifier: 
+  id: 4
+  name: Test Arm Right
+  height: 0
+  partType: {fileID: 11400000, guid: 1ee9e84cbf9242d478e1097c2f9fecf5, type: 2}
+  prefab: {fileID: 7547348352481026572, guid: 2db9ccab96fa8144095e3549d8deea3e, type: 3}
+  icon: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}

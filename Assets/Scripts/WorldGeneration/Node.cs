@@ -9,7 +9,7 @@ public class Node
 
     // Null means it's the starting point.
     public Node Parent { get; set; }
-    public RoomFlags RoomFlags { get; set; } = RoomFlags.None;
+    public RoomFlags RoomFlags { get; set; }
     public GameObject GameObject { get; set; }
     public int X { get; set; }
     public int Y { get; set; }

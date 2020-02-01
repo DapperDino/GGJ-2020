@@ -8,45 +8,41 @@ namespace DapperDino.GGJ2020.World
     public class DoorBehaviour : MonoBehaviour
     {
         [SerializeField] private bool RequiresKey = false;
-        private bool isOpen = false;
-        public bool IsOpen
-        {
-            get
-            {
-                return isOpen;
-            }
-            set
-            {
-                if (isOpen == value)
-                    return;
+        public bool Open { get; private set; } = false;
+        //public bool Open
+        //{
+        //    set
+        //    {
+        //        //if (open == value)
+        //        //    return;
 
-                if (value)
-                {
-                    if (RequiresKey)
-                    {
-                        if (false)// hasKey
-                        {
-                            Debug.Log("TODO: remove key from inventory");
-                            RequiresKey = false;
-                        }
-                        else
-                        {
-                            Debug.Log("Player misses a key in their inventory");
-                            return;
-                        }
-                    }
-                    transform.DOLocalMove(openPosition, 1f);
-                }
-                else
-                {
-                    Debug.Log("Opening door!!");
-                    transform.DOLocalMove(closedPosition, 1f);
-                }
+        //        //if (value)
+        //        //{
+        //        //    if (RequiresKey)
+        //        //    {
+        //        //        if (false)// hasKey
+        //        //        {
+        //        //            Debug.Log("TODO: remove key from inventory");
+        //        //            RequiresKey = false;
+        //        //        }
+        //        //        else
+        //        //        {
+        //        //            Debug.Log("Player misses a key in their inventory");
+        //        //            return;
+        //        //        }
+        //        //    }
+        //        //    transform.DOLocalMove(openPosition, 1f);
+        //        //}
+        //        //else
+        //        //{
+        //        //    Debug.Log("Opening door!!");
+        //        //    transform.DOLocalMove(closedPosition, 1f);
+        //        //}
 
-                isOpen = value;
-                Collider.enabled = !value;
-            }
-        }
+        //        //open = value;
+        //        //Collider.enabled = !value;
+        //    }
+        //}
 
         private Vector3 closedPosition;
         [SerializeField] private Vector3 openPosition = new Vector3(0, -1, 0);
@@ -63,7 +59,7 @@ namespace DapperDino.GGJ2020.World
 
             if (!RequiresKey)
             {
-                isOpen = true;
+                Open = true;
                 transform.localPosition = openPosition;
                 Collider.enabled = false;
             }
@@ -71,7 +67,8 @@ namespace DapperDino.GGJ2020.World
 
         public void Interact()
         {
-            IsOpen = true;
+            //Open = true;
+            SetDoorsOpen(!Open, true);
         }
 
         /// <summary>
@@ -80,7 +77,45 @@ namespace DapperDino.GGJ2020.World
         public void ForceOpen()
         {
             RequiresKey = false;
-            IsOpen = true;
+            Open = true;
+        }
+
+
+        public void SetDoorsOpen(bool open, bool attemptToUseKey = false)
+        {
+            if (Open == open)
+                return;
+
+            if (open)
+            {
+                if (RequiresKey && attemptToUseKey)
+                {
+                    if (false)// hasKey
+                    {
+                        Debug.Log("TODO: remove key from inventory");
+                        RequiresKey = false;
+                    }
+                    else
+                    {
+                        Debug.Log("Player misses a key in their inventory");
+                        return;
+                    }
+                }
+                transform.DOLocalMove(openPosition, 1f).OnComplete(() => 
+                {
+                    Collider.enabled = false; 
+                });
+            }
+            else
+            {
+                Debug.Log("Closing door!!");
+                transform.DOLocalMove(closedPosition, 1f).OnStart(() =>
+                {
+                    Collider.enabled = true;
+                });
+            }
+
+            Open = open;
         }
 
         /*internal DoorBehaviour LinkedDoor { get; set; }

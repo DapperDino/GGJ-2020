@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using UnityEngine;
 
 namespace DapperDino.GGJ2020.World
 {
-    public class WorldGenateration : MonoBehaviour
+    public class WorldGeneration : MonoBehaviour
     {
         private List<Node> nodes = new List<Node>();
         private static readonly Node startingRoom = new Node() { Name = "StartingRoom", RoomFlags = RoomFlags.NorthDoor, X = 0, Y = 0 };
@@ -18,8 +19,8 @@ namespace DapperDino.GGJ2020.World
         private int currentChain = 0;
         private int totalChainLength = 0;
 
-        [Range(1,100)][SerializeField] private uint RoomSizeMultiplier = 1;
-        private const uint RoomSize = 20;
+        [Range(1,100)][SerializeField] private int RoomSizeMultiplier = 1;
+        private const int RoomSize = 20;
 
         private RoomProperties[] Rooms;
         private static GameObject Wall;
@@ -29,6 +30,7 @@ namespace DapperDino.GGJ2020.World
 
         void Awake()
         {
+            DOTween.Init();
             Wall = Resources.Load<GameObject>("Rooms/Wall/Wall");
             Door = Resources.Load<GameObject>("Rooms/Wall/Door");
             LockedDoor = Resources.Load<GameObject>("Rooms/Wall/LockedDoor");
@@ -195,23 +197,23 @@ namespace DapperDino.GGJ2020.World
             Rooms = Resources.LoadAll<RoomProperties>("Rooms");
             Debug.Log($"Rooms found in the resources directory: {Rooms.Length}.");
 
-
+            var roomId = 2;
             foreach (var _node in nodes)
             {
                 // Check for the kind of room that is required.
                 // As in: where we need doors.
-                var roomId = UnityEngine.Random.Range(0, Rooms.Length - 1);
-                var roomObject = Rooms[roomId].gameObject;
+                GameObject roomObject = Rooms[roomId].gameObject;
+                roomId = UnityEngine.Random.Range(0, Rooms.Length - 1);
                 _node.GameObject = Instantiate(roomObject, 
                     new Vector3(_node.X * RoomSize * RoomSizeMultiplier, 0, _node.Y * RoomSize * RoomSizeMultiplier), 
                     roomObject.transform.rotation, this.transform);
                 _node.GameObject.name = _node.Name;
                 _node.GameObject.transform.localScale *= RoomSizeMultiplier;
-                var room = _node.GameObject.AddComponent<Room>();
+                Room room = _node.GameObject.AddComponent<Room>();
                 room.Node = _node;
 
 
-                //Placewalls
+                //Place the walls
                 Quaternion wallRotation = Quaternion.identity;
                 for (int i = 0; i < 4; i++)
                 {

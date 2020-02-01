@@ -33,11 +33,51 @@ namespace DapperDino.GGJ2020.World
         [SerializeField] internal int TotalFlags;
         [SerializeField] public List<string> Neighbors;
 
+        internal int EnemyCount { get; set; }
+
         private bool isCleared;
+
         public bool IsCleared
         {
             get { return isCleared; }
-            set { isCleared = value; }
+            set 
+            { 
+                isCleared = value;
+                if (isCleared)
+                    Deactivate();
+            }
+        }
+
+
+        public void Activate()
+        {
+            if (IsCleared)
+                return;
+
+            foreach(var door in Node.doors)
+            {
+                door.SetDoorsOpen(false);
+            }
+        }
+
+        public void Deactivate()
+        {
+            foreach(var door in Node.doors)
+            {
+                door.SetDoorsOpen(true);
+            }
+        }
+
+        public void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player"))
+                Activate();
+        }
+
+        public void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("Player"))
+                Deactivate();
         }
     }
 

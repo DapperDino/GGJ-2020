@@ -17,8 +17,6 @@ public class WorldGenateration : MonoBehaviour
     private int chainLengthCounter = 0;
     private int currentChain = 0;
     private int totalChainLength = 0;
-    public RoomFlags demo = RoomFlags.ContainsKey;
-
     private const uint RoomSize = 20;
 
 
@@ -36,11 +34,13 @@ public class WorldGenateration : MonoBehaviour
         for (int i = 0; i < MaxRooms; i++)
         {
             Node newNode = new Node();
+
             // Check if the lastNode
             if (lastNode == nodes[0])
             {
                 newNode.X = lastNode.X;
-                newNode.Y = lastNode.Y + 1;                
+                newNode.Y = lastNode.Y + 1;
+                newNode.RoomFlags |= RoomFlags.SouthDoor;
             }
             else
             {
@@ -60,18 +60,41 @@ public class WorldGenateration : MonoBehaviour
                         {
                             case 0: // North
                                 newNode.Y += 1;
+                                IsValidSpace = IsEmpty(newNode);
+                                if (IsValidSpace)
+                                {
+                                    newNode.RoomFlags |= RoomFlags.SouthDoor;
+                                    lastNode.RoomFlags |= RoomFlags.NorthDoor;
+                                }
                                 break;
                             case 1: // East
                                 newNode.X += 1;
+                                IsValidSpace = IsEmpty(newNode);
+                                if (IsValidSpace)
+                                {
+                                    newNode.RoomFlags |= RoomFlags.WestDoor;
+                                    lastNode.RoomFlags |= RoomFlags.EastDoor;
+                                }
                                 break;
                             case 2: // South
                                 newNode.Y -= 1;
+                                IsValidSpace = IsEmpty(newNode);
+                                if (IsValidSpace)
+                                {
+                                    newNode.RoomFlags |= RoomFlags.NorthDoor;
+                                    lastNode.RoomFlags |= RoomFlags.SouthDoor;
+                                }
                                 break;
                             case 3: // West
                                 newNode.X -= 1;
+                                IsValidSpace = IsEmpty(newNode);
+                                if (IsValidSpace)
+                                {
+                                    newNode.RoomFlags |= RoomFlags.EastDoor;
+                                    lastNode.RoomFlags |= RoomFlags.WestDoor;
+                                }
                                 break;
                         }
-                        IsValidSpace = IsEmpty(newNode);
                         if (IsValidSpace)
                             break;
                     }
@@ -89,15 +112,22 @@ public class WorldGenateration : MonoBehaviour
                 if (!continueForward)
                 {
                     if (chainLengthCounter > 1)
+                    {
                         currentChain++;
+                        // ADD key
+                        if ((lastNode.RoomFlags & RoomFlags.ContainsKey) == 0)
+                        {
+                            lastNode.RoomFlags |= RoomFlags.ContainsKey;
+                            lastNode.Name += "_ContainsKey";
+                        }
+                    }
 
-                    // ADD key
-                    lastNode.RoomFlags |= RoomFlags.ContainsKey;
-                    lastNode.Name += "_ContainsKey";
-
-                    var totalBackwardsSteps = UnityEngine.Random.Range(3, totalChainLength - 2);
-                    totalChainLength = chainLengthCounter - totalBackwardsSteps;
+                    var totalBackwardsSteps = UnityEngine.Random.Range(1, totalChainLength - 2);
+                    // Calculate the length of the current 
+                    totalChainLength += chainLengthCounter - totalBackwardsSteps - 1;
+                    // Reset the current chain counter
                     chainLengthCounter = 0;
+                    // Defines how long the next chain will be
                     randomChainLength = UnityEngine.Random.Range(2, MaxChain);
                     Node node = lastNode;
                     for (int stepsbackward = 0; stepsbackward < totalBackwardsSteps; stepsbackward++)
@@ -110,7 +140,8 @@ public class WorldGenateration : MonoBehaviour
                         catch(Exception e)
                         {
                             Debug.LogError(e.Message);
-                            Debug.Log(totalBackwardsSteps);
+                            Debug.Log("Chain length = " + totalChainLength);
+                            Debug.Log("Steps backwards" + totalBackwardsSteps);
                             Debug.Log(node.Name);
                             return;
                         }
@@ -124,10 +155,6 @@ public class WorldGenateration : MonoBehaviour
 
             }
             newNode.Name = $"Node:{currentChain}_{chainLengthCounter}";
-            //if ((newNode.RoomFlags & RoomFlags.ContainsKey) != 0)
-            //{
-            //    newNode.Name += "_ContainsKey";
-            //}
             newNode.Parent = lastNode;
             Add(newNode);
             lastNode = newNode;
@@ -135,15 +162,17 @@ public class WorldGenateration : MonoBehaviour
     }
     private void ApplyRooms()
     {
-        foreach(var node in nodes)
+        foreach(var _node in nodes)
         {
             // Check for the kind of room that is required.
             // As in: where we need doors.
             var roomObject = Resources.Load<GameObject>("Rooms/DefaultRoom");
-            node.GameObject = Instantiate(roomObject, new Vector3(node.X * RoomSize, 0, node.Y * RoomSize), roomObject.transform.rotation, this.transform);
-            node.GameObject.name = node.Name;
+            _node.GameObject = Instantiate(roomObject, new Vector3(_node.X * RoomSize, 0, _node.Y * RoomSize), roomObject.transform.rotation, this.transform);
+            _node.GameObject.name = _node.Name;
             // TODO: remove this
-            node.GameObject.transform.localScale = (new Vector3(20, 20, 1));
+            _node.GameObject.transform.localScale = (new Vector3(20, 20, 1));
+            var room = _node.GameObject.AddComponent<Room>();
+            room.Node = _node;
         }
     }
 
@@ -158,7 +187,7 @@ public class WorldGenateration : MonoBehaviour
         nodes.Add(node);
     }
 
-    static int[] directions = { 0, 1, 2, 3 };
+    static readonly int[] directions = { 0, 1, 2, 3 };
     static int[] GetRandomDirection()
     {
         return directions.OrderBy(x => UnityEngine.Random.Range(0, 15)).ToArray();

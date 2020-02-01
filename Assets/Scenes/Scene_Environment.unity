@@ -150,7 +150,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3dbd03cf4a64c64e8e85b80cb7ed7bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxRooms: 60
+  MaxRooms: 100
+  MaxChain: 7
 --- !u!4 &322553591
 Transform:
   m_ObjectHideFlags: 0

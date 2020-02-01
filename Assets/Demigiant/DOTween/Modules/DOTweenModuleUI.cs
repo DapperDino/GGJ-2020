@@ -587,7 +587,7 @@ namespace DG.Tweening
         // ███ INTERNAL CLASSES ████████████████████████████████████████████████████████████████████████████████████████████████
         // █████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
 
-        public static class Utils
+        public static class Utilities
         {
             /// <summary>
             /// Converts the anchoredPosition of the first RectTransform to the second RectTransform,

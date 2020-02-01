@@ -23,7 +23,7 @@ namespace DG.Tweening
     /// - DOTWEEN_TMP ► TextMesh Pro
     /// - DOTWEEN_TK2D ► 2D Toolkit
     /// </summary>
-	public static class DOTweenModuleUtils
+	public static class DOTweenModuleUtilities
     {
         static bool _initialized;
 

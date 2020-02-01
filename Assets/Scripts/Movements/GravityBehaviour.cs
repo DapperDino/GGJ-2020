@@ -13,8 +13,7 @@ namespace DapperDino.GGJ2020.Movements
             get
             {
                 if (gravity != null) { return gravity; }
-                gravity = new Gravity(controller, Physics.gravity.y);
-                return gravity;
+                return gravity = new Gravity(controller, Physics.gravity.y);
             }
         }
 

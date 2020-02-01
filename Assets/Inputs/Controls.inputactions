@@ -2,8 +2,89 @@
     "name": "Controls",
     "maps": [
         {
-            "name": "Player",
+            "name": "Developer",
+            "id": "15e73c19-ef9f-4a87-929e-f6e7b02d03f0",
+            "actions": [
+                {
+                    "name": "Console Commands",
+                    "type": "Button",
+                    "id": "6f498959-f5ad-4497-a55e-d71424527fb2",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press"
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "4c0b0e16-6ff9-4ad7-ae58-e8bac03f333e",
+                    "path": "<Keyboard>/backquote",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "Console Commands",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Pause Menu",
             "id": "e072fe59-e724-43d0-9b2f-97ff8263d610",
+            "actions": [
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "8b69d0a4-69fb-4136-b69a-604c2c472c73",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press"
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "af21341a-b66c-41c0-be8f-02886ef5b981",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "UI",
+            "id": "8e2244b0-5773-45d6-8ebe-dedda319cc94",
+            "actions": [
+                {
+                    "name": "Inventory",
+                    "type": "Button",
+                    "id": "47116e6d-f198-42f5-94ba-72e9ca754633",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press"
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "0fc29e7a-854f-46d1-b42a-7bb2cf43f919",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "Inventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Player",
+            "id": "0caf1a10-5d64-4fe1-a0b7-918e55172fa9",
             "actions": [
                 {
                     "name": "Movement",
@@ -18,8 +99,24 @@
                     "type": "Value",
                     "id": "552b61e9-1acb-4e9c-a6f6-ddef5a12526f",
                     "expectedControlType": "Vector2",
-                    "processors": "",
+                    "processors": "ScaleVector2(x=0.25,y=0.25)",
                     "interactions": ""
+                },
+                {
+                    "name": "Fire Left",
+                    "type": "Button",
+                    "id": "902945a6-e3e3-4c0d-bf13-16b8248e715f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press"
+                },
+                {
+                    "name": "Fire Right",
+                    "type": "Button",
+                    "id": "f08f6455-79dc-4c30-8b2e-82e230644278",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press"
                 }
             ],
             "bindings": [
@@ -251,6 +348,28 @@
                     "processors": "",
                     "groups": "Keyboard & Mouse",
                     "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2efba8f5-14f0-4947-8e59-6b4d17ad765f",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "Fire Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "acfc713f-1cb6-4c33-aba4-37b7112ae21f",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "Fire Right",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

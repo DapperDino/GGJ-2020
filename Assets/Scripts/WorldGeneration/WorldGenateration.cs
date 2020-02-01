@@ -19,7 +19,7 @@ namespace DapperDino.GGJ2020.World
         private int chainLengthCounter = 0;
         private int currentChain = 0;
         private int totalChainLength = 0;
-        private const uint RoomSize = 20;
+        private const uint RoomSize = 60;
 
 
         void Awake()

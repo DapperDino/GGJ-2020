@@ -411,7 +411,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 516369617}
-  m_LocalRotation: {x: 0.21944794, y: 0.062729746, z: -0.0141405985, w: 0.9735028}
+  m_LocalRotation: {x: 0.21910858, y: 0.08284903, z: -0.018675907, w: 0.9719973}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -485,7 +485,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 599301510}
-  m_LocalRotation: {x: 0.21944794, y: 0.06272975, z: -0.014140669, w: 0.9735028}
+  m_LocalRotation: {x: 0.21910858, y: 0.08284904, z: -0.018675977, w: 0.9719973}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -777,6 +777,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LevelManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5153480948675739790, guid: 91bb616d3a3210140999a29e7fde502d,
+        type: 3}
+      propertyPath: MaxRooms
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 5153480948675739791, guid: 91bb616d3a3210140999a29e7fde502d,
         type: 3}
@@ -1222,7 +1227,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1437095206}
-  m_LocalRotation: {x: 0.21944796, y: 0.06272974, z: -0.014140566, w: 0.9735028}
+  m_LocalRotation: {x: 0.21910858, y: 0.08284902, z: -0.018675879, w: 0.9719973}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1342,7 +1347,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687258581}
-  m_LocalRotation: {x: 0.21944797, y: 0.062729746, z: -0.0141406, w: 0.9735028}
+  m_LocalRotation: {x: 0.21910861, y: 0.08284903, z: -0.018675908, w: 0.9719973}
   m_LocalPosition: {x: 0, y: 5, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []

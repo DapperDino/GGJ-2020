@@ -117,6 +117,22 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "Press"
+                },
+                {
+                    "name": "Pickup",
+                    "type": "Button",
+                    "id": "893566f5-d92a-46d7-a1ed-78ea43971bee",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press"
+                },
+                {
+                    "name": "Equip",
+                    "type": "Button",
+                    "id": "7dc2e525-82d3-41f7-aaf9-3afbe2eafd52",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Hold"
                 }
             ],
             "bindings": [
@@ -370,6 +386,28 @@
                     "processors": "",
                     "groups": "Keyboard & Mouse",
                     "action": "Fire Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1a72009f-2c52-4a2b-b3a5-9cf2e075759d",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "Pickup",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d80dc26e-c1e9-4bcb-a08a-ef794d83d7e5",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "Equip",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

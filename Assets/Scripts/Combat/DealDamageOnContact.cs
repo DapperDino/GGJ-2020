@@ -9,12 +9,12 @@ namespace DapperDino.GGJ2020.Combat
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!other.TryGetComponent<Health>(out var health))
+            if (!other.TryGetComponent<IDamageable>(out var damageable))
             {
                 return;
             }
 
-            health.DealDamage(damage, rb.velocity.normalized);
+            damageable.DealDamage(damage, rb.velocity.normalized);
         }
     }
 }

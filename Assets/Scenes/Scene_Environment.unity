@@ -340,6 +340,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5153480948675739790, guid: 91bb616d3a3210140999a29e7fde502d,
+        type: 3}
+      propertyPath: MaxRooms
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5153480948675739790, guid: 91bb616d3a3210140999a29e7fde502d,
+        type: 3}
+      propertyPath: RoomSizeMultiplier
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5153480948675739791, guid: 91bb616d3a3210140999a29e7fde502d,
         type: 3}
       propertyPath: m_LocalPosition.x

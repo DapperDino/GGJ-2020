@@ -1,13 +1,19 @@
 ﻿using DapperDino.GGJ2020.Parts;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace DapperDino.GGJ2020.Items
 {
     public class Inventory
     {
-        public Inventory(int size)
+        private readonly PartType torsoType;
+
+        public Inventory(PartType torsoType, int size)
         {
+            this.torsoType = torsoType;
             Items = new Item[size];
         }
 
@@ -26,6 +32,7 @@ namespace DapperDino.GGJ2020.Items
             {
                 if (Items[i] != null) { continue; }
 
+                item.Inventory = this;
                 Items[i] = item;
 
                 OnInventorySlotUpdate(i, item);
@@ -34,6 +41,64 @@ namespace DapperDino.GGJ2020.Items
             }
 
             return false;
+        }
+
+        public bool AddEquipment(ItemTemplate itemTemplate) => AddEquipment(new Item(itemTemplate));
+
+        public bool AddEquipment(Item newItem)
+        {
+            Item item = GetItemByPartType(newItem.PartType);
+
+            if (item != null) { return false; }
+
+            if (newItem.PartType != torsoType)
+            {
+                if (GetItemByPartType(torsoType) == null)
+                {
+                    return false;
+                }
+            }
+
+            newItem.Inventory = this;
+            equipment[newItem.PartType] = newItem;
+
+            OnEquipmentSlotUpdate(newItem.PartType, newItem);
+
+            return true;
+        }
+
+        public GameObject Unequip(Item itemToUnequip)
+        {
+            var item = GetItemByPartType(itemToUnequip.PartType);
+
+            if (item.Id != itemToUnequip.Id) { return null; }
+
+            equipment[item.PartType].Inventory = null;
+            equipment[item.PartType] = null;
+
+            OnEquipmentSlotUpdate(item.PartType, equipment[item.PartType]);
+
+            var pickupInstance = Object.Instantiate(item.PickupPrefab, item.PartBehaviour.transform.position, item.PartBehaviour.transform.rotation);
+
+            if (!pickupInstance.TryGetComponent<ItemPickupBehaviour>(out var itemPickupBehaviour))
+            {
+                return pickupInstance;
+            }
+
+            itemPickupBehaviour.SetItem(item);
+
+            if (item.PartType != torsoType) { return pickupInstance; }
+
+            for (int i = 0; i < equipment.Count; i++)
+            {
+                var piece = equipment.Values.ElementAt(i);
+
+                if (piece == null) { continue; }
+
+                Unequip(piece);
+            }
+
+            return pickupInstance;
         }
 
         public Item GetItemByPartType(PartType partType)
@@ -72,7 +137,17 @@ namespace DapperDino.GGJ2020.Items
         {
             Item inventoryItem = Items[itemIndex];
 
+            if (inventoryItem.CurrentHealth == 0) { return; }
+
             if (partType != inventoryItem.PartType) { return; }
+
+            if (inventoryItem.PartType != torsoType)
+            {
+                if (GetItemByPartType(torsoType) == null)
+                {
+                    return;
+                }
+            }
 
             if (equipment.TryGetValue(partType, out Item partItem))
             {
@@ -100,6 +175,8 @@ namespace DapperDino.GGJ2020.Items
             {
                 if (partItem.PartType != inventoryItem.PartType) { return; }
 
+                if (inventoryItem.CurrentHealth == 0) { return; }
+
                 Item tempItem = partItem;
 
                 equipment[partType] = inventoryItem;
@@ -109,6 +186,18 @@ namespace DapperDino.GGJ2020.Items
             {
                 Items[itemIndex] = partItem;
                 equipment[partType] = null;
+
+                if (partType == torsoType)
+                {
+                    for (int i = 0; i < equipment.Count; i++)
+                    {
+                        var piece = equipment.Values.ElementAt(i);
+
+                        if (piece == null) { continue; }
+
+                        Unequip(piece);
+                    }
+                }
             }
 
             OnInventorySlotUpdate(itemIndex, Items[itemIndex]);

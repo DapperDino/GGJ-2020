@@ -1,8 +1,7 @@
 ﻿using DapperDino.GGJ2020.Items;
-using DapperDino.GGJ2020.Utilities.ConsoleCommands.Commands;
 using UnityEngine;
 
-namespace DapperDino.Hel.Utilities.ConsoleCommands.Commands
+namespace DapperDino.GGJ2020.Utilities.ConsoleCommands.Commands
 {
     [CreateAssetMenu(fileName = "New Give Command", menuName = "Utilities/Console Commands/Give Command")]
     public class GiveCommand : ConsoleCommand

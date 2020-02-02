@@ -37,6 +37,8 @@ namespace DapperDino.GGJ2020.Movements
         {
             this.movementBehaviour = movementBehaviour;
 
+            if (movementBehaviour == null) { return; }
+
             movementBehaviour.Movement.AddModifier(MovementInput);
         }
     }

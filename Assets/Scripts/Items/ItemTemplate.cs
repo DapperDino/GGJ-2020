@@ -9,8 +9,10 @@ namespace DapperDino.GGJ2020.Items
         [SerializeField] private int id = -1;
         [SerializeField] private new string name = "New Item Name";
         [SerializeField] private float height = 0f;
+        [SerializeField] private int maxHealth = 100;
         [SerializeField] private PartType partType = null;
         [SerializeField] private GameObject prefab = null;
+        [SerializeField] private GameObject pickupPrefab = null;
 
         [Header("UI")]
         [SerializeField] private Sprite icon = null;
@@ -18,8 +20,10 @@ namespace DapperDino.GGJ2020.Items
         public int Id => id;
         public string Name => name;
         public float Height => height;
+        public int MaxHealth => maxHealth;
         public PartType PartType => partType;
         public GameObject Prefab => prefab;
+        public GameObject PickupPrefab => pickupPrefab;
         public Sprite Icon => icon;
     }
 }

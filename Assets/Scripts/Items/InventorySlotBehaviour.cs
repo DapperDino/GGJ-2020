@@ -6,6 +6,8 @@ namespace DapperDino.GGJ2020.Items
     {
         public int SlotIndex { get; private set; }
 
+        public override Item Item => inventoryBehaviour.Inventory.Items[SlotIndex];
+
         private void Awake() => SlotIndex = transform.GetSiblingIndex();
 
         private void OnEnable()

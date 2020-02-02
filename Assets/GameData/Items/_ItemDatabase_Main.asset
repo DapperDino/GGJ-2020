@@ -13,6 +13,11 @@ MonoBehaviour:
   m_Name: _ItemDatabase_Main
   m_EditorClassIdentifier: 
   items:
+  - {fileID: 11400000, guid: de7c01260e3d3164a9192cf2b9f34d51, type: 2}
+  - {fileID: 11400000, guid: 1cb1a1a6a1b8f2b459feb813a052bc72, type: 2}
+  - {fileID: 11400000, guid: 200e3ed3a14a22a48bb5aed371e859e4, type: 2}
+  - {fileID: 11400000, guid: 0229a2330be8e6e4b87ea56eb0e682ef, type: 2}
+  - {fileID: 11400000, guid: 6981ffc236bf12a4d861ebce3652a2ce, type: 2}
   - {fileID: 11400000, guid: fbe50da98c7db9f4ebca91eb98b8bb3d, type: 2}
   - {fileID: 11400000, guid: 68c4ea945990c9343aae79ad99746840, type: 2}
   - {fileID: 11400000, guid: 341350f707e487e4c9fed413a08b2918, type: 2}

@@ -32,7 +32,17 @@ namespace DapperDino.GGJ2020.Parts
             }
             else if (partType == legsPartType)
             {
+                //if (legs != null)
+                //{
+                //    transform.position -= new Vector3(0f, legs.Height, 0f);
+                //}
+
                 legs = item;
+
+                if (legs != null)
+                {
+                    transform.position += new Vector3(0f, legs.Height, 0f);
+                }
             }
             else
             {

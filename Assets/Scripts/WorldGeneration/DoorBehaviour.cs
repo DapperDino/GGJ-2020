@@ -3,101 +3,110 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorBehaviour : MonoBehaviour
+namespace DapperDino.GGJ2020.World
 {
-    [SerializeField] private bool RequiresKey = false;
-    private bool isOpen = false;
-    public bool IsOpen {
-        get
+    public class DoorBehaviour : MonoBehaviour
+    {
+        [SerializeField] private bool RequiresKey = false;
+        public bool Open { get; private set; } = false;
+
+        private Vector3 closedPosition;
+        [SerializeField] private Vector3 openPosition = new Vector3(0, -1, 0);
+        private Collider Collider { get; set; }
+        public Room Room { get; set; }
+
+
+        private void Awake()
         {
-            return isOpen;
-        }
-        set
-        {
-            if (isOpen != value)
+            Collider = transform.GetComponentInParent<Collider>();
+            closedPosition = transform.localPosition;
+            Room = transform.GetComponentInParent<Room>();
+            Room.Node.doors.Add(this);
+
+            if (!RequiresKey)
             {
-                if (value)
-                {
-                    if (RequiresKey)
-                    {
-                        if (false)// hasKey
-                        {
-                            Debug.Log("TODO: remove key from inventory");
-                            RequiresKey = false;
-                        }
-                        else
-                        {
-                            Debug.Log("Player misses a key in their inventory");
-                            return;
-                        }
-                    }
-                    transform.DOLocalMove(openPosition, 1f);
-
-                }
-                else
-                {
-                    Debug.Log("Opening door!!");
-                    transform.DOLocalMove(closedPosition, 1f);
-                }
-
-                isOpen = value;
-                Collider.enabled = !value;
+                Open = true;
+                transform.localPosition = openPosition;
+                Collider.enabled = false;
             }
-
         }
-    }
 
-    private Vector3 closedPosition;
-    [SerializeField] private Vector3 openPosition = new Vector3(0, -1, 0);
-    private Collider Collider { get; set; }
-    public Room Room { get; set;}
-
-
-    private void Awake()
-    {
-        Collider = transform.GetComponentInParent<Collider>();
-        closedPosition = transform.localPosition;
-        Room = transform.GetComponentInParent<Room>();
-        Room.Node.doors.Add(this);
-    }
-
-    public void Interact()
-    {
-        Open();
-    }
-
-    /// <summary>
-    /// Forces the door open, even when locked.
-    /// </summary>
-    public void ForceOpen()
-    {
-        RequiresKey = false;
-        IsOpen = true;
-    }
-
-    internal DoorBehaviour LinkedDoor { get; set; }
-    public void Open()
-    {
-        if (LinkedDoor == null)
+        public void Interact()
         {
-            // Worst case scenario, we check all the neightbor rooms (4) and all their rooms (4) aka. 16 iterations.
-            foreach (var neighbor in Room.Node.neighbors)
+            //Open = true;
+            SetDoorsOpen(!Open, true);
+        }
+
+        /// <summary>
+        /// Forces the door open, even when locked.
+        /// </summary>
+        public void ForceOpen()
+        {
+            RequiresKey = false;
+            Open = true;
+        }
+
+
+        public void SetDoorsOpen(bool open, bool attemptToUseKey = false)
+        {
+            if (Open == open)
+                return;
+
+            if (open)
             {
-                foreach (var door in neighbor.doors)
+                if (RequiresKey && attemptToUseKey)
                 {
-                    // There is probably a better way to do this.. honestly
-                    if (Vector3.Distance(door.transform.position, transform.position) < 3f)
+                    if (false)// hasKey
                     {
-                        //Debug.Log("Bingo.");
-                        LinkedDoor = door;
+                        Debug.Log("TODO: remove key from inventory");
+                        RequiresKey = false;
+                    }
+                    else
+                    {
+                        Debug.Log("Player misses a key in their inventory");
+                        return;
                     }
                 }
+                transform.DOLocalMove(openPosition, 1f).OnComplete(() => 
+                {
+                    Collider.enabled = false; 
+                });
             }
-            // Provide a reference to ourselves in the neighboring door
-            LinkedDoor.LinkedDoor = this;
-        }
-        LinkedDoor.IsOpen = !IsOpen;
-        IsOpen = !IsOpen;
-    }
+            else
+            {
+                Debug.Log("Closing door!!");
+                transform.DOLocalMove(closedPosition, 1f).OnStart(() =>
+                {
+                    Collider.enabled = true;
+                });
+            }
 
+            Open = open;
+        }
+
+        /*internal DoorBehaviour LinkedDoor { get; set; }
+        public void Open()
+        {
+            if (LinkedDoor == null)
+            {
+                // Worst case scenario, we check all the neightbor rooms (4) and all their rooms (4) aka. 16 iterations.
+                foreach (var neighbor in Room.Node.neighbors)
+                {
+                    foreach (var door in neighbor.doors)
+                    {
+                        // There is probably a better way to do this.. honestly
+                        if (Vector3.Distance(door.transform.position, transform.position) < 3f)
+                        {
+                            //Debug.Log("Bingo.");
+                            LinkedDoor = door;
+                        }
+                    }
+                }
+                // Provide a reference to ourselves in the neighboring door
+                LinkedDoor.LinkedDoor = this;
+            }
+            LinkedDoor.IsOpen = !IsOpen;
+            IsOpen = !IsOpen;
+        }*/
+    }
 }

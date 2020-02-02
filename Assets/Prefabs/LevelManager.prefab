@@ -44,5 +44,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxRooms: 25
-  MaxChain: 7
-  RoomSizeMultiplier: 3
+  MaxChain: 25

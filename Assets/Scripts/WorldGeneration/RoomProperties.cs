@@ -10,5 +10,7 @@ namespace DapperDino.GGJ2020.World
         // Read for the possible door locations
         // Only 0-3 are read.
         public RoomFlags RoomFlags;
+
+        [SerializeField] internal Transform[] SpawnPoints; 
     }
 }

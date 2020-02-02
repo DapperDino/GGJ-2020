@@ -9,40 +9,6 @@ namespace DapperDino.GGJ2020.World
     {
         [SerializeField] private bool RequiresKey = false;
         public bool Open { get; private set; } = false;
-        //public bool Open
-        //{
-        //    set
-        //    {
-        //        //if (open == value)
-        //        //    return;
-
-        //        //if (value)
-        //        //{
-        //        //    if (RequiresKey)
-        //        //    {
-        //        //        if (false)// hasKey
-        //        //        {
-        //        //            Debug.Log("TODO: remove key from inventory");
-        //        //            RequiresKey = false;
-        //        //        }
-        //        //        else
-        //        //        {
-        //        //            Debug.Log("Player misses a key in their inventory");
-        //        //            return;
-        //        //        }
-        //        //    }
-        //        //    transform.DOLocalMove(openPosition, 1f);
-        //        //}
-        //        //else
-        //        //{
-        //        //    Debug.Log("Opening door!!");
-        //        //    transform.DOLocalMove(closedPosition, 1f);
-        //        //}
-
-        //        //open = value;
-        //        //Collider.enabled = !value;
-        //    }
-        //}
 
         private Vector3 closedPosition;
         [SerializeField] private Vector3 openPosition = new Vector3(0, -1, 0);

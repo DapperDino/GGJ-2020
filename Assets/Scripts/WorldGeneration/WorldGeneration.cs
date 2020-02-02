@@ -36,7 +36,7 @@ namespace DapperDino.GGJ2020.World
             LockedDoor = Resources.Load<GameObject>("Rooms/Wall/LockedDoor");
 
             GenerateLayout();
-            ApplyRooms();
+            GenerateRooms();
         }
 
         private void GenerateLayout()
@@ -192,12 +192,13 @@ namespace DapperDino.GGJ2020.World
             Debug.Log("<color=green>Finished generating the layout!</color>");
         }
 
-        private void ApplyRooms()
+        private void GenerateRooms()
         {
             Rooms = Resources.LoadAll<RoomProperties>("Rooms");
             Debug.Log($"Rooms found in the resources directory: {Rooms.Length}.");
 
             var roomId = 2;
+            int difficulty = 1;
             foreach (var _node in nodes)
             {
                 // Check for the kind of room that is required.
@@ -211,6 +212,9 @@ namespace DapperDino.GGJ2020.World
                 _node.GameObject.transform.localScale *= RoomSizeMultiplier;
                 Room room = _node.GameObject.AddComponent<Room>();
                 room.Node = _node;
+                // Spawn difficulty /2 enemies.
+                room.EnemiesSpawnCount = difficulty / 2;
+                difficulty++;
 
 
                 //Place the walls

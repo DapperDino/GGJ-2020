@@ -12,6 +12,8 @@ namespace DapperDino.GGJ2020.Items
         [SerializeField] private GameObject slotDisplay = null;
         [SerializeField] private Image image = null;
 
+        public abstract Item Item { get; }
+
         public abstract void OnDrop(PointerEventData eventData);
 
         protected void UpdateSlot(Item item)

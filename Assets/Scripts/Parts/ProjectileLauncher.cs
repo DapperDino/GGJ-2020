@@ -12,7 +12,7 @@ namespace DapperDino.GGJ2020.Parts
 
         public void Launch()
         {
-            GameObject projectile = Instantiate(prefab, launchPoint.position, Quaternion.identity);
+            GameObject projectile = Instantiate(prefab, launchPoint.position, Quaternion.LookRotation(launchPoint.forward));
 
             if (!projectile.TryGetComponent<Rigidbody>(out var rb))
             {

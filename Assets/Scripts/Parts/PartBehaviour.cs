@@ -1,4 +1,5 @@
-﻿using DapperDino.GGJ2020.Items;
+﻿using DapperDino.GGJ2020.Combat;
+using DapperDino.GGJ2020.Items;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -17,8 +18,6 @@ namespace DapperDino.GGJ2020.Parts
 
         private void OnEnable()
         {
-            HandleEquipmentUpdated(partType, inventoryBehaviour.Inventory.GetItemByPartType(partType));
-
             inventoryBehaviour.Inventory.OnEquipmentSlotUpdate += HandleEquipmentUpdated;
         }
 
@@ -45,10 +44,18 @@ namespace DapperDino.GGJ2020.Parts
 
             if (PartInstance != null)
             {
+                item.PartBehaviour = null;
+
                 Destroy(PartInstance);
             }
 
             PartInstance = Instantiate(item.Prefab, partAttatchTransform);
+            item.PartBehaviour = this;
+
+            if (PartInstance.TryGetComponent<Health>(out var health))
+            {
+                health.SetItem(item);
+            }
 
             OnItemEquipped.Invoke();
         }

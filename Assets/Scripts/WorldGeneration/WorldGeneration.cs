@@ -19,7 +19,7 @@ namespace DapperDino.GGJ2020.World
         private int currentChain = 0;
         private int totalChainLength = 0;
 
-        [Range(1,100)][SerializeField] private int RoomSizeMultiplier = 1;
+        private int RoomSizeMultiplier = 3; // Do not change! Navmesh baked prefabs won't scale properly!
         private const int RoomSize = 20;
 
         private RoomProperties[] Rooms;
@@ -204,12 +204,12 @@ namespace DapperDino.GGJ2020.World
                 // Check for the kind of room that is required.
                 // As in: where we need doors.
                 GameObject roomObject = Rooms[roomId].gameObject;
-                roomId = UnityEngine.Random.Range(0, Rooms.Length - 1);
+                roomId = UnityEngine.Random.Range(0, Rooms.Length);
                 _node.GameObject = Instantiate(roomObject, 
                     new Vector3(_node.X * RoomSize * RoomSizeMultiplier, 0, _node.Y * RoomSize * RoomSizeMultiplier), 
                     roomObject.transform.rotation, this.transform);
                 _node.GameObject.name = _node.Name;
-                _node.GameObject.transform.localScale *= RoomSizeMultiplier;
+                //_node.GameObject.transform.localScale *= RoomSizeMultiplier;
                 Room room = _node.GameObject.AddComponent<Room>();
                 room.Node = _node;
                 // Spawn difficulty /2 enemies.

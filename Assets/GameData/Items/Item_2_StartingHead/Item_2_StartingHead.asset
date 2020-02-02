@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cfc951a24c52da49a055cf7c7ed505f, type: 3}
+  m_Name: Item_2_StartingHead
+  m_EditorClassIdentifier: 
+  id: 2
+  name: Starting Head
+  height: 0.75
+  maxHealth: 100
+  partType: {fileID: 11400000, guid: 01bac28946f5c2b4c9acea1fdd8156a1, type: 2}
+  prefab: {fileID: 7547348352481026572, guid: 2c8c079a738ec224781c067ba0f8f2e9, type: 3}
+  pickupPrefab: {fileID: 7547348352481026572, guid: 41047f6a9882807469cd77e4f2c10448,
+    type: 3}
+  icon: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}

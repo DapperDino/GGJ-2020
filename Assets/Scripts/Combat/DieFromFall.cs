@@ -13,7 +13,6 @@ namespace DapperDino.GGJ2020.Combat
             if (transform.position.y <= killHeight)
             {
                 onDeath.Raise();
-                Destroy(gameObject);
             }
         }
     }

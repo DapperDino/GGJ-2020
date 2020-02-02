@@ -303,6 +303,10 @@ GameObject:
   - component: {fileID: 1211265712}
   - component: {fileID: 4626956759056712395}
   - component: {fileID: 4273751753907590450}
+  - component: {fileID: 8574792884271688946}
+  - component: {fileID: 1211265719}
+  - component: {fileID: 7042884447896463028}
+  - component: {fileID: 7333583753123950638}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -454,6 +458,111 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8574792884271688946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437547092501948966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7561ee1ae4829c84bb2bac081d54bb7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 1437547092501948966}
+  coreTransform: {fileID: 8587895455344502912}
+  explosionEffect: {fileID: 1243038880155905074, guid: 4aab6e052241f614fb2b15a7d3e08858,
+    type: 3}
+  radius: 5
+  force: 5
+--- !u!114 &1211265719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437547092501948966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e482af61c549d49906e7c3f1752fdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 59bb062c98577a34d8396fd72356a3d6, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4273751753907590450}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+--- !u!114 &7042884447896463028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437547092501948966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4649e15e04fab448aa5f364c5b40eee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 3
+  inventoryBehaviour: {fileID: 301946680}
+--- !u!114 &7333583753123950638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437547092501948966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8155aa712795b444f86befbfa08fc0ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priority: 0
+  axisFloatResponses: []
+  axisVectorResponses: []
+  actionResponses:
+  - action: {fileID: 11400000, guid: 2d91b16fdf54f224cb1a78539dd2354e, type: 2}
+    onAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7042884447896463028}
+          m_MethodName: Pickup
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - action: {fileID: 11400000, guid: 765842428bb0fb44ba21d0aa30222069, type: 2}
+    onAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7042884447896463028}
+          m_MethodName: Equip
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1669875709833170337
 GameObject:
   m_ObjectHideFlags: 0

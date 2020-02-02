@@ -20,4 +20,4 @@ MonoBehaviour:
   prefab: {fileID: 7547348352481026572, guid: 0d25935663f2bf84b9ad6a4e80a7b18f, type: 3}
   pickupPrefab: {fileID: 7547348352481026572, guid: f0a8f85c181873843a89f5032d10db81,
     type: 3}
-  icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  icon: {fileID: 21300000, guid: 1335a9048663ce345b608a1651371a46, type: 3}

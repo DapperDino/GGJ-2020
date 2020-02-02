@@ -51,7 +51,7 @@ MonoBehaviour:
   OnItemEquipped:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3630744197982639950}
+      - m_Target: {fileID: 0}
         m_MethodName: UpdateHeight
         m_Mode: 1
         m_Arguments:
@@ -76,7 +76,7 @@ MonoBehaviour:
   OnItemUnequipped:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3630744197982639950}
+      - m_Target: {fileID: 0}
         m_MethodName: UpdateHeight
         m_Mode: 1
         m_Arguments:
@@ -112,7 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partBehaviour: {fileID: 3673758348599725717}
   characterTransform: {fileID: 4751332739753332570}
-  movementBehaviour: {fileID: 4324905704746903265}
+  movementBehaviour: {fileID: 0}
 --- !u!1 &1503041893265949838
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,14 +380,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4751332739753332570}
-  - component: {fileID: 5273512057092616488}
-  - component: {fileID: 4324905704746903265}
-  - component: {fileID: 4324905704746903270}
   - component: {fileID: 4324905704416790642}
-  - component: {fileID: 3630744197982639950}
   - component: {fileID: 6501087616659311989}
   - component: {fileID: 5150001613451887601}
   - component: {fileID: 3229521476012531594}
+  - component: {fileID: 3741173511683330267}
+  - component: {fileID: 7228093367950032529}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -414,51 +412,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!143 &5273512057092616488
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3455975757788280172}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 1
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.01
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4324905704746903265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3455975757788280172}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 382f663f817d18a44ac8a41612f9ab32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controller: {fileID: 5273512057092616488}
---- !u!114 &4324905704746903270
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3455975757788280172}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 348bc881dd786c04a8be576b757f46ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementBehaviour: {fileID: 4324905704746903265}
-  controller: {fileID: 5273512057092616488}
 --- !u!114 &4324905704416790642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -473,22 +426,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   torsoType: {fileID: 11400000, guid: c68cfa163ce679c4ba366c988955d565, type: 2}
   size: 10
---- !u!114 &3630744197982639950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3455975757788280172}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b74b353682b7f6c448119a23d82265ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventoryBehaviour: {fileID: 4324905704416790642}
-  characterController: {fileID: 5273512057092616488}
-  headPartType: {fileID: 11400000, guid: 01bac28946f5c2b4c9acea1fdd8156a1, type: 2}
-  legsPartType: {fileID: 11400000, guid: 06493358389ad2a42805feaab97d6ab0, type: 2}
 --- !u!114 &6501087616659311989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -545,6 +482,45 @@ MonoBehaviour:
     type: 3}
   radius: 5
   force: 100
+--- !u!114 &3741173511683330267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3455975757788280172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af963d479f2c70741b54e6cd8a4583a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aggroRange: 15
+  attackRange: 10
+  navMeshAgent: {fileID: 7228093367950032529}
+  leftArmWeapon: {fileID: 4324905704557036953}
+  rightArmWeapon: {fileID: 4324905704171466057}
+--- !u!195 &7228093367950032529
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3455975757788280172}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 2.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 500
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &4324905703017047332
 GameObject:
   m_ObjectHideFlags: 0
@@ -599,7 +575,7 @@ MonoBehaviour:
   OnItemUnequipped:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5273512057092616488}
+      - m_Target: {fileID: 0}
         m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
@@ -610,7 +586,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4324905704746903265}
+      - m_Target: {fileID: 0}
         m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
@@ -742,7 +718,7 @@ MonoBehaviour:
   OnItemEquipped:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3630744197982639950}
+      - m_Target: {fileID: 0}
         m_MethodName: UpdateHeight
         m_Mode: 1
         m_Arguments:
@@ -756,7 +732,7 @@ MonoBehaviour:
   OnItemUnequipped:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3630744197982639950}
+      - m_Target: {fileID: 0}
         m_MethodName: UpdateHeight
         m_Mode: 1
         m_Arguments:

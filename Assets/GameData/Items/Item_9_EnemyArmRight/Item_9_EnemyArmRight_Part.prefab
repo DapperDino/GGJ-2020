@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8621469972b1fd745b510517c111889e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 8120375138894748054, guid: 06a142ab3fbc6b249b45e372d1067934, type: 3}
+  prefab: {fileID: 8120375138894748054, guid: 23ca2d220cefcc24385ac0c3284707eb, type: 3}
   launchPoint: {fileID: 1190904346641680554}
   velocity: {x: 0, y: 0, z: 50}
 --- !u!65 &2647227890983772576

@@ -10,6 +10,8 @@ namespace DapperDino.GGJ2020.Items
 
         public PartType PartType => partType;
 
+        public override Item Item => inventoryBehaviour.Inventory.GetItemByPartType(PartType);
+
         private void OnEnable()
         {
             UpdateSlot(PartType, inventoryBehaviour.Inventory.GetItemByPartType(PartType));

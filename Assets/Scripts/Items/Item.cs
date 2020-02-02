@@ -15,7 +15,7 @@ namespace DapperDino.GGJ2020.Items
         }
 
         public int Id => template.Id;
-        public string Name => template.name;
+        public string Name => template.Name;
         public float Height => template.Height;
         public int CurrentHealth { get; set; }
         public int MaxHealth => template.MaxHealth;
@@ -25,5 +25,6 @@ namespace DapperDino.GGJ2020.Items
         public Sprite Icon => template.Icon;
         public PartBehaviour PartBehaviour { get; set; }
         public Inventory Inventory { get; set; }
+        public int RepairCost => MaxHealth - CurrentHealth;
     }
 }

@@ -43,13 +43,38 @@ namespace DapperDino.GGJ2020.Items
             return false;
         }
 
+        public void RemoveItem(Item item)
+        {
+            for (int i = 0; i < Items.Length; i++)
+            {
+                if(Items[i] == item)
+                {
+                    Items[i] = null;
+
+                    OnInventorySlotUpdate(i, Items[i]);
+
+                    return;
+                }
+            }
+        }
+
         public bool AddEquipment(ItemTemplate itemTemplate) => AddEquipment(new Item(itemTemplate));
 
         public bool AddEquipment(Item newItem)
         {
             Item item = GetItemByPartType(newItem.PartType);
 
-            if (item != null) { return false; }
+            if (item != null)
+            {
+                var pickupInstance = Object.Instantiate(item.PickupPrefab, item.PartBehaviour.transform.position, item.PartBehaviour.transform.rotation);
+
+                if (!pickupInstance.TryGetComponent<ItemPickupBehaviour>(out var itemPickupBehaviour))
+                {
+                    return pickupInstance;
+                }
+
+                itemPickupBehaviour.SetItem(item);
+            }
 
             if (newItem.PartType != torsoType)
             {

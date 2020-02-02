@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace DapperDino.GGJ2020.Parts
 {
@@ -10,7 +8,12 @@ namespace DapperDino.GGJ2020.Parts
 
         private WeaponInputReceiver weaponInputReceiver;
 
-        public void Fire() => weaponInputReceiver?.Fire();
+        public void Fire()
+        {
+            if (weaponInputReceiver == null) { return; }
+
+            weaponInputReceiver.Fire();
+        }
 
         public void SetUp()
         {

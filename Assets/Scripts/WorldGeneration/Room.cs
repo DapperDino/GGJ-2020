@@ -35,6 +35,7 @@ namespace DapperDino.GGJ2020.World
         [SerializeField] public List<string> Neighbors;
         private static GameObject EnemyObject;
 
+        RoomProperties RoomProperties { get; set; }
         private Vector3[] spawnpoints;
         internal int EnemiesSpawnCount { get; set; }
         int enemiesAlive = 0;
@@ -54,14 +55,15 @@ namespace DapperDino.GGJ2020.World
 
         private void Start()
         {
-            var props = GetComponent<RoomProperties>();
-            spawnpoints = props.SpawnPoints.Select(x => x.position).ToArray();
+            RoomProperties = GetComponent<RoomProperties>();
+            spawnpoints = RoomProperties.SpawnPoints.Select(x => x.position).ToArray();
         }
 
         public void Activate()
         {
             if (IsCleared) return;
             if (EnemiesSpawnCount <= 0) return;
+            if (enemiesAlive > 0) return;
             if (EnemyObject == null) EnemyObject = Resources.Load<GameObject>("Enemy_resource");
 
             foreach(var door in Node.doors)
@@ -69,7 +71,7 @@ namespace DapperDino.GGJ2020.World
                 door.SetDoorsOpen(false);
             }
 
-            enemiesAlive += EnemiesSpawnCount;
+            enemiesAlive = EnemiesSpawnCount;
             for (int i = 0; i < EnemiesSpawnCount; i++)
             {
                 var j = UnityEngine.Random.Range(0, spawnpoints.Length);
@@ -90,6 +92,11 @@ namespace DapperDino.GGJ2020.World
             {
                 door.SetDoorsOpen(true);
             }
+            if ((node.RoomFlags & RoomFlags.ContainsTeleporter) != 0)
+            {
+                Debug.Log("Activate teleporter");
+                RoomProperties.Teleporter.EnableTeleporter();
+            }
         }
 
         public void OnTriggerEnter(Collider other)
@@ -109,7 +116,7 @@ namespace DapperDino.GGJ2020.World
 
         private void EnemyDied()
         {
-            enemiesAlive--;
+            enemiesAlive -= 1;
             IsCleared = (enemiesAlive <= 0);
         }
     }

@@ -209,13 +209,15 @@ namespace DapperDino.GGJ2020.World
                     new Vector3(_node.X * RoomSize * RoomSizeMultiplier, 0, _node.Y * RoomSize * RoomSizeMultiplier), 
                     roomObject.transform.rotation, this.transform);
                 _node.GameObject.name = _node.Name;
+                if (UnityEngine.Random.Range(0, 5) == 0)
+                    _node.RoomFlags |= RoomFlags.ContainsTeleporter;
+
                 //_node.GameObject.transform.localScale *= RoomSizeMultiplier;
                 Room room = _node.GameObject.AddComponent<Room>();
                 room.Node = _node;
                 // Spawn difficulty /2 enemies.
                 room.EnemiesSpawnCount = difficulty / 2;
                 difficulty++;
-
 
                 //Place the walls
                 Quaternion wallRotation = Quaternion.identity;

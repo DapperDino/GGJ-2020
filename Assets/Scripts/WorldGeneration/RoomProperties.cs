@@ -12,5 +12,6 @@ namespace DapperDino.GGJ2020.World
         public RoomFlags RoomFlags;
 
         [SerializeField] internal Transform[] SpawnPoints; 
+        [SerializeField] internal Teleporter Teleporter;
     }
 }

@@ -16,6 +16,7 @@ namespace DapperDino.GGJ2020.World
         LockedEastDoor = 1 << 5,
         LockedSouthDoor = 1 << 6,
         LockedWestDoor = 1 << 7,
-        ContainsKey = 1 << 8
+        ContainsKey = 1 << 8,
+        ContainsTeleporter = 1 << 9
     }
 }

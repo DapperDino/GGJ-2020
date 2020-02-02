@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2160436398613698177}
   - component: {fileID: 7420868407632226615}
   m_Layer: 0
-  m_Name: Item_1_TestTorso_Part_Pickup
+  m_Name: Item_6_EnemyTorso_Part_Pickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,14 +26,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7547348352481026572}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 3733436399810029452}
+  - {fileID: 6785363278856482882}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &5287081308476038531
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -144,9 +144,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 974aa7286568e374784ef6c16a474827, type: 3}
---- !u!4 &3733436399810029452 stripped
+--- !u!4 &6785363278856482882 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 136911877913544557, guid: 974aa7286568e374784ef6c16a474827,
+  m_CorrespondingSourceObject: {fileID: 7783293223855280291, guid: 974aa7286568e374784ef6c16a474827,
     type: 3}
   m_PrefabInstance: {fileID: 3614626886990242017}
   m_PrefabAsset: {fileID: 0}

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace DapperDino.GGJ2020.Combat
 {
-    public class Health : MonoBehaviour
+    public class Health : MonoBehaviour, IDamageable
     {
         private Item item;
 
